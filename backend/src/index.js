@@ -9,9 +9,16 @@ import messageRoutes from '../routes/message.route.js'
 import { app ,server} from '../lib/socket.js';
 
 
+import path from 'path'
+
+
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ limit: '10mb', extended: true }))
 app.use(cookieParser())
+
+
+const PORT=process.env.PORT
+const _dirname=path.resolve()
 
 app.use(cors({
     origin:'http://localhost:5173',
@@ -23,9 +30,15 @@ app.use("/api/auth",authRoutes)
 app.use("/api/message",messageRoutes)
 
 
+if(process.env.NODE_ENV==="production"){
+    app.use(express.static(path.join(__dirname,"../frontend/dist")))
+
+    app.get("*",(req,res)=>{
+        res.sendFile(path.join(__dirname,"../frontend","dist","index.html"))
+    })
+}
 
 
-const PORT=process.env.PORT
 server.listen(PORT,()=>{
     console.log(`server is  running on port ${PORT}`)
     connectDB()
