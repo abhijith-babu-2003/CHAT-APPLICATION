@@ -8,9 +8,8 @@ import { app, server } from '../lib/socket.js'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 
-
 const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __dirname = dirname(__filename) 
 
 dotenv.config()
 
@@ -39,7 +38,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../../frontend', 'dist', 'index.html'))
   })
 }
-
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
