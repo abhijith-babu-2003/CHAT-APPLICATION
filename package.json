@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "concurrently": "^9.2.0"
-  }
+  "dependencies": {
+  "concurrently": "^9.2.0"
+}
 }
